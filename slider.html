@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+.slider {
+  width: 100%;
+  overflow: hidden;
+  border: 1px solid #000;
+}
+
+.box {
+  display: flex;
+  /* transition: 0.5s; */
+}
+
+.item {
+  min-width: 100%;
+  height: 120px;
+  display: grid;
+  place-items: center;
+  font-size: 30px;
+  background: #eee;
+}
+    </style>
+    </head>
+    <body>
+        <div class="slider" data-dir="l2r">
+            <div class="box">
+                <div class="item">1</div>
+                <div class="item">2</div>
+                <div class="item">3</div>
+            </div>
+            <button class="btn">btn</button>
+        </div>
+        <script>
+const slider = document.querySelector(".slider");
+const box = document.querySelector(".box");
+const button = document.querySelector(".btn");
+const width=1200;
+let pos = 0; // kitna move hua
+const dir = slider.dataset.dir; // l2r ya r2l
+
+button.onclick = function () {
+  if (dir === "l2r") {
+    pos = pos - width; // left move
+  } else {
+    pos = pos + width; // right move
+  }
+
+  // jab last slide cross ho jaye to wapas first
+//   if (pos <= -900 || pos >= 300) {
+//     pos = 0;
+//   }
+
+  box.style.transform = `translateX(${pos}px)`;
+};
+</script>
+
+    </body>
+</html>

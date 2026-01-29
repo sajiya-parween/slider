@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .slider-wrapper {
+            width: 900px;
+            overflow: hidden;
+            margin: auto;
+            border: 3px solid;
+        }
+
+        .slider-box {
+            display: flex;
+            transition: transform 0.5s ease;
+            /* justify-content: center; */
+        }
+
+        .item {
+            min-width: 900px;
+            height: 300px;
+
+        }
+
+        .item:nth-child(1) {
+            background-color: blue;
+        }
+
+        .item:nth-child(2) {
+            background-color: blueviolet;
+        }
+
+        .item:nth-child(3) {
+            background-color: rgb(182, 154, 207);
+        }
+
+        .item:nth-child(4) {
+            background-color: brown;
+        }
+
+        .item:nth-child(5) {
+            background-color: red;
+        }
+
+        .btn {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            background-color: rgb(117, 117, 192);
+            border: none;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .btn i {
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slider-wrapper" data-moveDirection="r2l">
+        <div class="slider-box">
+            <div class="item">1</div>
+            <div class="item">2</div>
+            <div class="item">3</div>
+            <div class="item">4</div>
+            <div class="item">5</div>
+        </div>
+    </div>
+    <button class="btn">
+        <i class="fa-sharp fa-solid fa-arrow-right"></i></button>
+    <script>
+        const button = document.querySelector(".btn");
+        const sliderBox = document.querySelector(".slider-box");
+        const sliderWrapper = document.querySelector(".slider-wrapper");
+        let count = 0;
+        const slideWidth = 900;
+        let total = document.querySelectorAll(".item").length;
+        let maxMove = -(total - 1) * slideWidth;
+        let moveDirection = sliderWrapper.dataset.moveDirection;
+        button.addEventListener("click", () => {
+            if (moveDirection === "r2l") {
+                count += slideWidth;
+            }
+            else {
+                count -= slideWidth;
+            }
+            if (count < maxMove) count = 0;
+            if (count > 0) count = maxMove;
+
+            sliderBox.style.transform = `translateX(${count}px)`;
+        });
+    </script>
+</body>
+</html>
